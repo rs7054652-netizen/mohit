@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden; /* Hide scrollbars for the slider layout */
+    background-color: #3b0918;
+    color: #f7e6c4;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: scale(1.05);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3b0918; /* Solid background for slides */
+}
+
+/* Let the first slide show the video */
+#slide-1 {
+    background-color: transparent;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+}
+
+/* Media (Video in Slide 1) */
+.media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.65);
+    z-index: 0;
+}
+
+.card-content {
+    position: relative;
+    z-index: 5;
+    background: rgba(43, 6, 15, 0.85);
+    border: 2px solid #d4af37;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.center-overlay {
+    position: absolute;
+    text-align: center;
+    z-index: 20;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+
+/* Typography */
+.title-cursive {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.5rem;
+    color: #d4af37;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.small-title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #f7e6c4;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.date-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.hint-text {
+    margin-top: 40px;
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.8;
+    animation: bounce 2s infinite;
+}
+
+.heart {
+    color: #ff3366;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+}
+
+.icon-top {
+    font-size: 3rem;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+/* Events */
+.event-box {
+    margin-top: 25px;
+    padding: 15px 10px;
+    border-bottom: 1px dashed #d4af37;
+}
+
+.event-box:last-child {
+    border-bottom: none;
+}
+
+.event-box h3 {
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.event-box h3 i {
+    margin-right: 10px;
+}
+
+.event-date {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.event-time {
+    color: #ffcccb;
+    font-size: 1rem;
+}
+
+.event-location {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Contacts */
+.contact-numbers a {
+    display: block;
+    color: #f7e6c4;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 5px 0;
+    transition: color 0.3s;
+}
+
+.contact-numbers a:hover {
+    color: #d4af37;
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.time-box {
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    padding: 15px 10px;
+    min-width: 80px;
+    flex: 1 1 70px;
+}
+
+.time-box span {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #d4af37;
+    display: block;
+    line-height: 1;
+}
+
+.time-box p {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* Animations */
+.animate-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+
+.slide.active .animate-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide.active .delay-1 { transition-delay: 0.4s; }
+.slide.active .delay-2 { transition-delay: 0.6s; }
+.slide.active .delay-3 { transition-delay: 0.8s; }
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+/* Nav & Indicators */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 30;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-btn:hover {
+    background: #d4af37;
+    color: #3b0918;
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(247, 230, 196, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: #d4af37;
+    transform: scale(1.5);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .title-cursive { font-size: 3.5rem; }
+    .small-title { font-size: 1.2rem; letter-spacing: 2px; }
+    .date-text { font-size: 1.4rem; }
+    .card-content { padding: 25px 15px; width: calc(100% - 20px); }
+    .event-box h3 { font-size: 1.3rem; }
+    .countdown { gap: 8px; }
+    .time-box { padding: 10px 5px; min-width: 65px; }
+    .time-box span { font-size: 1.8rem; }
+    .nav-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+}
